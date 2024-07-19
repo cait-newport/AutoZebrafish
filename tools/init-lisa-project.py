@@ -3,12 +3,7 @@
 # Abhishek Dutta
 # 16-Nov-2021 (Updated on 12-Dec-2022)
 
-import csv
-import time
-import json
 import os
-import random
-import uuid
 import argparse
 
 from json import encoder
@@ -88,6 +83,8 @@ if __name__=="__main__":
                     continue
                 file_relpath = os.path.join(prefix, filename)
                 lisa_findex = lisa.add_file(file_relpath, -1, -1)
+            if args.file_src_prefix is not None:
+                lisa.config('file_src_prefix', args.file_src_prefix)
             lisa.config('navigation_to', lisa_findex)
             lisa.save_json(args.outfn)
         print('LISA projects saved to %s' % (args.outfn))

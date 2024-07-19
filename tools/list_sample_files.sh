@@ -35,6 +35,9 @@ list_sample_files() {
     local percentage="$2"
     local output_file="sample_files_list.txt"
 
+    # Remove trailing slash from directory path if present
+    dir="${dir%/}"
+
     echo "Starting the script..."
     echo "Directory to process: $dir"
     echo "Percentage to sample: $percentage%"
@@ -45,13 +48,14 @@ list_sample_files() {
         return 1
     fi
 
+    echo "Directory exists. Proceeding..."
+
     # Check if the percentage is a valid number
     if ! [[ "$percentage" =~ ^[0-9]+$ ]] || [ "$percentage" -le 0 ] || [ "$percentage" -gt 100 ]; then
         echo "Error: Percentage must be a positive integer between 1 and 100."
         return 1
     fi
 
-    echo "Directory exists. Proceeding..."
 
     # Empty or create the output file
     > "$output_file"
@@ -94,7 +98,6 @@ list_sample_files() {
 
             # Write to output file
             for file in $sample_files; do
-                echo "Adding file to list: $folder/$file"
                 echo "$folder/$file" >> "$output_file"
                 if [[ $? -ne 0 ]]; then
                     echo "Error: Failed to write to output file $output_file"
