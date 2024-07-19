@@ -96,4 +96,21 @@ For example: https://meru.robots.ox.ac.uk/dset/image/cait-newport/triggerfish-na
 
 I had an issue where I got an error after this process, but I opened LISA from a different folder and it worked. 
 
-The annotations file will save on the server. Email Abhishek when you are done to get this. 
+The annotations file will save on the server. 
+
+## Get annotations
+To get your annotations saved as a text tile:
+
+Make a .txt file and name it something like shared-pid-list.txt
+On each line of the text line, put the pid of the project you want the results from. 
+
+Run: export-annotations.py
+Note: the '>' symbol is used to make it save the results in a text file. If you leave this off, the results will just appear
+the terminal. 
+
+```
+cd /Users/user/projects/AutoZebrafish/detector-training/ImageAnnotation
+
+python3 export-annotations.py --shared-pid-file /Users/user/projects/AutoZebrafish/detector-training/ImageAnnotation/shared-pid-list.txt > annotations.csv
+```
+**Issues:** the class data does not show up in the .csv. I have tried debugging so it might not be getting saved from LISA.
